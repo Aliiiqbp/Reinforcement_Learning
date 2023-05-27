@@ -9,13 +9,13 @@ sys.path.append(os.getcwd())
 import tools.util.plot_util as plot_util
 
 files = [
-    "output/log.txt",
+    "output/cheetah_bc_log.txt",
 ]
 
 draw_band = True
 x_key = "Samples"
 y_key = "Test_Return"
-plot_title = "BC - Cheetah"
+plot_title = "BC - cheetah"
 std_key = None
 
 def filter_data(x, window_size):

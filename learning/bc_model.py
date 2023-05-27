@@ -32,4 +32,8 @@ class BCModel(base_model.BaseModel):
     def eval_actor(self, obs):
         h = self._actor_layers(obs)
         a_dist = self._action_dist(h)
-        return a_dist  
+        return a_dist
+
+    @property
+    def action_dist(self):
+        return self._action_dist

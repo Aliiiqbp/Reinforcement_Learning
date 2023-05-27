@@ -37,7 +37,7 @@ class DMEnv(base_env.BaseEnv):
 
 
     def step(self, action):
-        time_step = self._env.step(action.cpu().numpy())
+        time_step = self._env.step(action.cpu().detach().numpy())
     
         obs = self._convert_obs(time_step.observation)
         reward = 0 if time_step.reward == None else time_step.reward
