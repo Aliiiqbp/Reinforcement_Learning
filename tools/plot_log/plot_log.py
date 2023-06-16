@@ -6,10 +6,10 @@ from functools import reduce
 import sys
 sys.path.append(os.getcwd())
 
-import tools.util.plot_util as plot_util
+import plot_util as plot_util # tools.util.plot_util
 
 files = [
-    "output/cheetah_bc_log.txt",
+    "output/cheetah_pg_log.txt",
 ]
 
 draw_band = True
