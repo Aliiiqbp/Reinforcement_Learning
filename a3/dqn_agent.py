@@ -50,9 +50,9 @@ class DQNAgent(base_agent.BaseAgent):
         norm_obs = self._obs_norm.normalize(obs)
         qs = self._model.eval_q(norm_obs)
 
-        if (self._mode == base_agent.AgentMode.TRAIN):
+        if self._mode == base_agent.AgentMode.TRAIN:
             a = self._sample_action(qs)
-        elif (self._mode == base_agent.AgentMode.TEST):
+        elif self._mode == base_agent.AgentMode.TEST:
             a = torch.argmax(qs, dim=-1)
         else:
             assert(False), "Unsupported agent mode: {}".format(self._mode)
@@ -219,7 +219,7 @@ class DQNAgent(base_agent.BaseAgent):
         # print("a:", a.shape)
         # print("q_values:", q_values.shape)
         q_values_selected = q_values.gather(1, a).squeeze(1)
-        loss = -torch.nn.functional.mse_loss(q_values_selected, tar_vals)
+        loss = torch.nn.functional.mse_loss(q_values_selected, tar_vals)
         ###### code
 
         '''End!'''

@@ -21,7 +21,7 @@ def load_args(argv):
     parser.add_argument("--visualize", dest="visualize", action="store_true", default=False)
     parser.add_argument("--env_config", dest="env_config")
     parser.add_argument("--agent_config", dest="agent_config")
-    parser.add_argument("--device", dest="device", type=str, default="cpu")
+    parser.add_argument("--device", dest="device", type=str, default="cuda")
     parser.add_argument("--log_file", dest="log_file", type=str, default="output/log.txt")
     parser.add_argument("--out_model_file", dest="out_model_file", type=str, default="output/model.pt")
     parser.add_argument("--int_output_dir", dest="int_output_dir", type=str, default="")
