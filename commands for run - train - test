@@ -1,24 +1,11 @@
-train cheetah cem:
+train dqn agent:
 
-python run.py --mode train --env_config data/envs/dm_cheetah.yaml --agent_config a2/dm_cheetah_cem_agent.yaml --log_file output/cheetah_cem_log.txt --out_model_file output/cheetah_cem_model.pt --max_samples 100000000 --visualize
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-test cheetah cem:
-
-python run.py --mode test --env_config data/envs/dm_cheetah.yaml --agent_config a2/dm_cheetah_cem_agent.yaml --model_file output/cheetah_cem_model.pt --visualize
+python run.py --mode train --env_config data/envs/atari_pong.yaml --agent_config a3/atari_dqn_agent.yaml --log_file output/dqn_log.txt --out_model_file output/dqn_model.pt --max_samples 3000000 --visualize
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-train cheetah pg:
+test dqn agent:
 
-python run.py --mode train --env_config data/envs/dm_cheetah.yaml --agent_config a2/dm_cheetah_pg_agent.yaml --log_file output/cheetah_pg_log.txt --out_model_file output/cheetah_pg_model.pt --max_samples 100000000 --visualize
+python run.py --mode test --env_config data/envs/atari_pong.yaml --agent_config a3/atari_dqn_agent.yaml --model_file output/dqn_model.pt --visualize
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-test cheetah pg:
-
-python run.py --mode test --env_config data/envs/dm_cheetah.yaml --agent_config a2/dm_cheetah_pg_agent.yaml --model_file output/cheetah_pg_model.pt --visualize
-
-
-

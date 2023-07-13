@@ -121,10 +121,25 @@ class DQNAgent(base_agent.BaseAgent):
         then linearly annealed to self._exp_prob_end over the course of self._exp_anneal_samples
         timesteps.
         '''
-
         # placeholder
-        prob = 1.0
+        # prob = 1.0
 
+        '''Start!'''
+        ###### print
+        # print("self._sample_count:", self._sample_count)
+        # print("self._exp_prob_beg", self._exp_prob_beg)
+        # print("self._exp_prob_end", self._exp_prob_end)
+        # print("self._exp_anneal_samples", self._exp_anneal_samples)
+        # print("self._exp_buffer_length:", self._exp_buffer_length)
+        # print("self._batch_size", self._batch_size)
+        ###### code
+        n = self._sample_count
+        n_max = self._exp_anneal_samples
+        epsilon_beg = self._exp_prob_beg
+        epsilon_end = self._exp_prob_end
+        l = n / n_max
+        prob = (1 - l) * epsilon_beg + l * epsilon_end
+        '''End!'''
         return prob
 
     def _sample_action(self, qs):
@@ -137,9 +152,27 @@ class DQNAgent(base_agent.BaseAgent):
         action.
         '''
         exp_prob = self._get_exp_prob()
-
         # placeholder
         a = torch.zeros(qs.shape[0], device=self._device, dtype=torch.int64)
+
+        '''Start!'''
+        ###### print
+        # print("qs:", qs)
+        # print("qs.shape[0]:", qs.shape[0])
+        # print("qs.shape[1]:", qs.shape[1])
+        ###### code
+        exp_prob = self._get_exp_prob()
+        batch_size = qs.shape[0]
+        action_dim = qs.shape[1]
+
+        for i in range(batch_size):
+            if torch.rand(1) < exp_prob-0.5:
+                a[i] = torch.randint(action_dim, size=(1,))
+            else:
+                a[i] = torch.argmax(qs[i])
+
+        # print("a: ", a)
+        '''End!'''
         return a
     
     def _compute_tar_vals(self, r, norm_next_obs, done):
@@ -153,7 +186,19 @@ class DQNAgent(base_agent.BaseAgent):
         '''
         
         # placeholder
-        tar_vals = torch.zeros_like(r)
+        # tar_vals = torch.zeros_like(r)
+
+
+        '''Start!'''
+        ###### print
+        self.gamma = 0.99
+        with torch.no_grad():
+            q_next = self._tar_model.eval_q(norm_next_obs)
+            max_q_next, _ = torch.max(q_next, dim=1)
+            tar_vals = r + self.gamma * (1 - done) * max_q_next
+        ###### code
+
+        '''End!'''
 
         return tar_vals
 
@@ -166,8 +211,19 @@ class DQNAgent(base_agent.BaseAgent):
         '''
         
         # placeholder
-        loss = torch.zeros(1)
-        
+        # loss = torch.zeros(1)
+
+        '''Start!'''
+        ###### print
+        q_values = self._model.eval_q(norm_obs)
+        # print("a:", a.shape)
+        # print("q_values:", q_values.shape)
+        q_values_selected = q_values.gather(1, a).squeeze(1)
+        loss = -torch.nn.functional.mse_loss(q_values_selected, tar_vals)
+        ###### code
+
+        '''End!'''
+
         return loss
     
     def _sync_tar_model(self):
@@ -177,5 +233,20 @@ class DQNAgent(base_agent.BaseAgent):
         HINT: self._model.parameters() can be used to retrieve a list of tensors containing
         the parameters of a model.
         '''
-        
+
+        '''Start!'''
+        ###### code - 1
+        # One way to do so I guess
+        # print("_sync_tar_model")
+        self._tar_model.load_state_dict(self._model.state_dict())
+
+        ###### code - 2
+        # another way
+        # main_model_params = self._model.parameters()
+        # tar_model_params = self._tar_model.parameters()
+        #
+        # for main_param, tar_param in zip(main_model_params, tar_model_params):
+        #     tar_param.data.copy_(main_param.data)
+        '''End!'''
+
         return
