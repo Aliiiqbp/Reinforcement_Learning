@@ -9,7 +9,7 @@ sys.path.append(os.getcwd())
 import plot_util as plot_util # tools.util.plot_util
 
 files = [
-    "output/cheetah_pg_log.txt",
+    "output/atari_pong_dqn_log.txt",
 ]
 
 draw_band = True
