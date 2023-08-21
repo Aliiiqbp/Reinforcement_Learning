@@ -1,6 +1,6 @@
 # RL Assignments
 
-Template code for reinforcement learning assignments.
+Template code for reinforcement learning assignments completed by myself as course assignments.
 
 
 ## Topics
