@@ -2,6 +2,27 @@
 
 Template code for reinforcement learning assignments.
 
+
+## Topics
+
+- MDPs/POMDPs
+- Policy Evaluation
+- Behavioral Cloning
+- Policy Search
+- RL Algorithms
+- Policy Gradients
+- Q-learning
+- Actor-Critic Algorithms (DDPG/SAC)
+- Model-Based RL
+- On-Policy vs Off-Policy Algorithms
+- Advance Policy Gradients
+- Advance Q-Learning
+- Exploration
+- Unsupervised RL
+- Imitation Learning
+- Domain Transfer
+- Offline Reinforcement Learning
+
 ## Getting Started
 
 Install requirements:
@@ -24,7 +45,7 @@ To train a policy, run the following command:
 ``python run.py --env_config data/envs/dm_cheetah.yaml --agent_config a2/dm_cheetah_cem_agent.yaml --mode train --log_file output/log.txt --out_model_file output/model.pt --visualize``
 
 - `--env_config` specifies the configuration file for the environment.
-- `--agent_config` specifies configuration file for the agent.
+- `--agent_config` specifies the configuration file for the agent.
 - `--visualize` enables visualization. Rendering should be disabled for faster training.
 - `--log_file` specifies the output log file, which will keep track of statistics during training.
 - `--out_model_file` specifies the output model file, which contains the model parameters.
@@ -46,3 +67,4 @@ During training, a tensorboard `events` file will be saved the same output direc
 
 
 The output log `.txt` file can also be plotted using the plotting script in `tools/plot_log/plot_log.py`.
+
